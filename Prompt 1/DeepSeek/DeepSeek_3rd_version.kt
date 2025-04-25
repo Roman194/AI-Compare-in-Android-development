@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 *Отлично! Теперь код запускается, но нужно ещё кое-что доработать. Обрати пожалуйста внимание, что cancelOrderAndNavigateToStart должна быть private функцией. 
 *Также заголовок должен изменяться с изменением параметра currentScreen в функции cupcakeApp

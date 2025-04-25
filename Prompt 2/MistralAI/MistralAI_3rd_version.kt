@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 * Доработай решение. В MainScreenElements созданный тобой items не подходит, так как messages это переменная типа List<Message>, а требуется в параметрах Int.
 *  По этой причине используй ItemIndexed.

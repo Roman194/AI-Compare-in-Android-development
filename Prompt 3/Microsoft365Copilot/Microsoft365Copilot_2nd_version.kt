@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 * Необходимо доработать решение. HttpLoggingInterceptor() желательно предварительно объявить в качестве отдельной переменной и только потом уже добавлять его 
 * в okHttpClient. В Moshi.Builder() не добавлен KotlinJsonAdapterFactory. Без этого десереализатор не настроен на преобразование JSON в Kotlin Object. Также в

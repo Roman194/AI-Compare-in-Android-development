@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 *Модифицируй предыдущее решение так, чтобы заголовок брался из состояния enum-класса. Используй для этого currentScreen из CupcakeApp.
 

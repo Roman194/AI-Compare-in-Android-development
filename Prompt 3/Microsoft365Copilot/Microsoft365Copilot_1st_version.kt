@@ -1,3 +1,5 @@
+// !The running version of the code! * (it will fail trying to get data from the intenet)
+
 //ArtistsApiService.kt
 interface ArtistsApiService {//Microsoft 365 Copilot prompt 3 1st attempt
     @GET("similar")

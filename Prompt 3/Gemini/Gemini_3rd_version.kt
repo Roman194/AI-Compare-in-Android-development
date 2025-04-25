@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 * Необходимо ещё доработать решение. findArtistsUiState должно инициализироваться следующим образом: var findArtistsUiState: FindArtistUiState by 
 * mutableStateOf(FindArtistUiState.Start). Ниже прикрепляю FindArtistUiState и используемые в проекте data-классы. Необходимо переписать ViewModel 

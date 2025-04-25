@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 * Необходимо доработать решение.  Необходимо перенести object ArtistApi в файл ArtistsApiService.kt. В переменную moshi после Moshi.Builder() не добавлен 
 * KotlinJsonAdapterFactory. Без этого десереализатор не настроен на преобразование JSON в Kotlin Object.

@@ -1,5 +1,6 @@
- // 6.	ArtistsApiService.kt
-interface ArtistsApiService {{//GigaChat prompt 3 1st attempt
+
+ //	ArtistsApiService.kt
+interface ArtistsApiService {//GigaChat prompt 3 1st attempt
     
     @GET("similar")
     fun getSimilarArtists(
@@ -41,6 +42,7 @@ object ArtistApi {
     }
 }
 
+//ParseConstants.kt
 object ParseConstants {
     const val API_KEY = BuildConfig.TASTE_DIVE_API_KEY
 

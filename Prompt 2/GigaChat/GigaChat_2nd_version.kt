@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 * Необходимо доработать решение. В EveryUserReview в MaterialTheme вместо colorScheme необходимо обращаться к colors. Также вместо bodyMedium и bodySmall весь
 * текст должен использовать именно стиль body2.

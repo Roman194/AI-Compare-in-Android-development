@@ -1,3 +1,5 @@
+// !The running version of the code!
+
 //ArtistApiServise.kt
 interface ArtistsApiService {//Claude AI Prompt 3 1st attempt
     @GET("similar")
@@ -43,6 +45,8 @@ class ParseConstants {
         val API_KEY: String = BuildConfig.TASTE_DIVE_API_KEY
     }
 }
+
+//FindArtistsViewModel.kt
 class FindArtistsViewModel: ViewModel() {
 
     var findArtistsUiState: FindArtistUiState by mutableStateOf(FindArtistUiState.Start)

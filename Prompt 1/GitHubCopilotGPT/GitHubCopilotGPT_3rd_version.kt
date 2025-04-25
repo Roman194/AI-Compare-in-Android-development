@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 * В функции SelectOptionsScreen в параметре options DataSource.flavors предоставляет данные типа List<int>, а требуются данные типа List<string>. 
 * Поэтому эти данные необходимо конвертировать в тип String и передать в функцию в этом формате.

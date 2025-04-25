@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 *Модифицируй пожалуйста предыдущее решение.  Реализованные в рамках навигации Composable-функции должны иметь ряд других параметров. Для StartOrderScreen это параметр onNextButtonClicked типа 
 * (Int) -> Unit вместо onSelectionChanged. Для  SelectOptionScreen нужно добавить onNextButtonClicked типа () -> Unit = {}. Для OrderSummaryScreen -  onSendButtonClicked типа (String, String) -> Unit вместо onConfirmButtonClicked.

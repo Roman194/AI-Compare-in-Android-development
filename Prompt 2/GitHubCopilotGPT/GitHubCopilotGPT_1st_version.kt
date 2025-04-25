@@ -1,3 +1,4 @@
+// !The running version of the code!
 @Composable //GitHub GPT Copilot prompt 2 1st attempt 
 fun EveryUserReview(message: Message) {
     var isExpanded by remember { mutableStateOf(false) }

@@ -1,8 +1,10 @@
+// !The running version of the code!
 /**
 * Нужно ещё немного доработать решение. Дело в том, что okHttpClient не находится в классе ParseConstants и поэтому при обращении к этой переменной в 
 * Retrofit.Builder() нужно указать только название этой переменной.
 */
 
+//ArtistApiService.kt
 interface ArtistsApiService {//Grok prompt 3 3rd attempt
     @GET("similar")
     suspend fun getSimilarArtists(

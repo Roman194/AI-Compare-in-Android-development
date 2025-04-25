@@ -1,3 +1,4 @@
+// !The running version of the code!
 @Composable //Claude AI prompt 1 1st attempt
 fun CupcakeApp(
     viewModel: OrderViewModel = viewModel(),

@@ -1,3 +1,4 @@
+// !The running version of the code!
 /**
 * Необходимо ещё доработать код. В функции SelectOptionScreen не хватает параметра onSelectionChanged, где с помощью соответствующих функций из viewModel задавались бы значения для flavour и 
 * date. 

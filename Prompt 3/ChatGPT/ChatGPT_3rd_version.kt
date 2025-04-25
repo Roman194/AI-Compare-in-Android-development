@@ -1,3 +1,5 @@
+// !The running version of the code!
+
 /**
 * Необходимо ещё немного доработать решение. Верни пожалуйста в ArtistsApiService.kt в функцию getSimilarArtists query k и передай в неё напрямую значение 
 * ключа API из ParseConstants. 

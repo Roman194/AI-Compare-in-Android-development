@@ -1,3 +1,5 @@
+
+//ArtistApiService.kt
 interface ArtistsApiService {//Grok prompt 3 1th attempt
     @GET("similar")
     suspend fun getSimilarArtists(
@@ -23,6 +25,7 @@ object ArtistApi {
     }
 }
 
+//ParseConstants.kt
 class ParseConstants {
     companion object {
         val API_KEY = BuildConfig.TASTE_DIVE_API_KEY
@@ -35,6 +38,7 @@ class ParseConstants {
     }
 }
 
+//FindArtistsViewModel.kt
 class FindArtistsViewModel : ViewModel() {
 
     var findArtistsUiState: FindArtistUiState by mutableStateOf(FindArtistUiState.Start)

@@ -10,6 +10,8 @@
 * уже конвертировать объект типа ErrorResponse или MoshiResponse в нужный в FindArtistUiState. Также обрати внимание на то, что переменную findArtistUiState 
 * можно вынести до оператора when.
 */
+
+//ArtistApiService.kt
 	interface ArtistsApiService {//Grok prompt 3 2nd attempt
 	    @GET("similar")
 	    suspend fun getSimilarArtists(
@@ -20,72 +22,74 @@
 	}
 	
 	object ArtistApi {
-17.	    private val moshi = Moshi.Builder()
-18.	        .add(KotlinJsonAdapterFactory())
-19.	        .build()
-20.	    
-21.	    private val retrofit = Retrofit.Builder()
-22.	        .baseUrl("https://tastedive.com/api/")
-23.	        .client(ParseConstants.okHttpClient)
-24.	        .addConverterFactory(ScalarsConverterFactory.create())
-25.	        .addConverterFactory(MoshiConverterFactory.create(moshi))
-26.	        .addCallAdapterFactory(EitherCallAdapterFactory())
-27.	        .build()
-28.	    
-29.	    val artistsRetrofitService: ArtistsApiService by lazy {
-30.	        retrofit.create(ArtistsApiService::class.java)
-31.	    }
-32.	}
-33.	val loggingInterceptor = HttpLoggingInterceptor().apply {
-34.	    level = HttpLoggingInterceptor.Level.BODY
-35.	}
-36.	
-37.	val okHttpClient = OkHttpClient.Builder()
-38.	    .addInterceptor(loggingInterceptor)
-39.	    .build()
-40.	
-41.	class ParseConstants {
-42.	    companion object {
-43.	        val API_KEY = BuildConfig.TASTE_DIVE_API_KEY
-44.	    }
-45.	}
-46.	class FindArtistsViewModel : ViewModel() {
-47.	
-48.	    var findArtistsUiState: FindArtistUiState by mutableStateOf(FindArtistUiState.Start)
-49.	        private set
-50.	
-51.	    fun getSimilarArtists(originalArtistName: String) {
-52.	        findArtistsUiState = FindArtistUiState.Loading(originalArtistName)
-53.	        
-54.	        if (originalArtistName.isBlank()) {
-55.	            findArtistsUiState = FindArtistUiState.Error(
-56.	                errorMessage = "Please enter an artist name",
-57.	                originalArtist = originalArtistName
-58.	            )
-59.	            return
-60.	        }
-61.	
-62.	        viewModelScope.launch {
-63.	            val response = ArtistApi.artistsRetrofitService.getSimilarArtists(
-64.	                artistName = convertArtistNameToQueryFormat(originalArtistName)
-65.	            )
-66.	            
-67.	            findArtistsUiState = when (response) {
-68.	                is Either.Fail -> FindArtistUiState.Error(
-69.	                    errorMessage = response.value.toStringType(),
-70.	                    originalArtist = originalArtistName
-71.	                )
-72.	                is Either.Success -> FindArtistUiState.Success(
-73.	                    artistUIValues = response.value.similar.results.map { it.toUI() },
-74.	                    originalArtist = originalArtistName
-75.	                )
-76.	            }
-77.	        }
-78.	    }
-79.	
-80.	    private fun convertArtistNameToQueryFormat(artistName: String): String {
-81.	        return artistName.trim().replace(" ", "+")
-82.	    }
-83.	}
+	    private val moshi = Moshi.Builder()
+	        .add(KotlinJsonAdapterFactory())
+	        .build()
+	    
+	    private val retrofit = Retrofit.Builder()
+	        .baseUrl("https://tastedive.com/api/")
+	        .client(ParseConstants.okHttpClient)
+	        .addConverterFactory(ScalarsConverterFactory.create())
+	        .addConverterFactory(MoshiConverterFactory.create(moshi))
+	        .addCallAdapterFactory(EitherCallAdapterFactory())
+	        .build()
+	    
+	    val artistsRetrofitService: ArtistsApiService by lazy {
+		        retrofit.create(ArtistsApiService::class.java)
+	    }
+	}
+	val loggingInterceptor = HttpLoggingInterceptor().apply {
+	    level = HttpLoggingInterceptor.Level.BODY
+	}
+	
+	val okHttpClient = OkHttpClient.Builder()
+	    .addInterceptor(loggingInterceptor)
+	    .build()
+	
+//ParseConstants.kt
+	class ParseConstants {
+	    companion object {
+	        val API_KEY = BuildConfig.TASTE_DIVE_API_KEY
+	    }
+	}
+//FindArtistsViewModel.kt
+	class FindArtistsViewModel : ViewModel() {
+	
+	    var findArtistsUiState: FindArtistUiState by mutableStateOf(FindArtistUiState.Start)
+	        private set
+	
+	    fun getSimilarArtists(originalArtistName: String) {
+	        findArtistsUiState = FindArtistUiState.Loading(originalArtistName)
+	        
+	        if (originalArtistName.isBlank()) {
+	            findArtistsUiState = FindArtistUiState.Error(
+	                errorMessage = "Please enter an artist name",
+	                originalArtist = originalArtistName
+	            )
+	            return
+	        }
+	
+	        viewModelScope.launch {
+	            val response = ArtistApi.artistsRetrofitService.getSimilarArtists(
+	                artistName = convertArtistNameToQueryFormat(originalArtistName)
+	            )
+	            
+	            findArtistsUiState = when (response) {
+	                is Either.Fail -> FindArtistUiState.Error(
+	                    errorMessage = response.value.toStringType(),
+	                    originalArtist = originalArtistName
+	                )
+	                is Either.Success -> FindArtistUiState.Success(
+	                    artistUIValues = response.value.similar.results.map { it.toUI() },
+	                    originalArtist = originalArtistName
+	                )
+	            }
+	        }
+	    }
+	
+	    private fun convertArtistNameToQueryFormat(artistName: String): String {
+	        return artistName.trim().replace(" ", "+")
+	    }
+	}
 
 

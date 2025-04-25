@@ -5,6 +5,7 @@ import com.example.find_similar_artists_app.models.data.moshi.MoshiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+//ArtistApiService.kt
 interface ArtistsApiService {//GitHub Copilot GPT prompt 3 1st attempt
 
     @GET("similar")
@@ -26,6 +27,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
+//ParseConstants.kt
 class ParseConstants {
     companion object {
         val API_KEY: String = BuildConfig.TASTE_DIVE_API_KEY
@@ -57,6 +59,7 @@ object ArtistApi {
         retrofit.create(ArtistsApiService::class.java)
 }
 
+//FindArtistsViewModel.kt
 package com.example.find_similar_artists_app.ui
 
 import androidx.lifecycle.ViewModel

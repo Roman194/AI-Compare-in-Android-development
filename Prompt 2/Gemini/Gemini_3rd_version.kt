@@ -1,9 +1,10 @@
+// !The running version of the code!
 /**
 * Необходимо ещё доработать решение. В MainScreenElements необходимо убрать лишний item и оставить только itemsIndexed. В EveryUserReview в painter нужно 
 * использовать метод под названием uiLogo. В переменной surfaceColor нужно делать инициализацию с помощью animateColorAsState вместо remember.
 */
 
-itemsIndexed(messages) { index, message ->{//Gemini prompt 2 3rd attempt
+itemsIndexed(messages) { index, message ->//Gemini prompt 2 3rd attempt
     if (index > 0) {
         Divider(
             color = MaterialTheme.colors.onSurface.copy(alpha = 0.08f),

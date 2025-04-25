@@ -8,6 +8,7 @@
 * или MoshiResponse в нужный в FindArtistUiState. Также обрати внимание на то, что переменную findArtistUiState можно вынести до оператора when.
 */
 
+//ArtistApiService.kt
 package com.example.find_similar_artists_app.data
 
 import com.example.find_similar_artists_app.BuildConfig
@@ -65,6 +66,7 @@ object ArtistApi {
     }
 }
 
+//FindArtistsViewModel.kt
 package com.example.find_similar_artists_app.ui
 
 import androidx.compose.runtime.getValue

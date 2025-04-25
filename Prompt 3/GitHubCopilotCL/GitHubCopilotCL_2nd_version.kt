@@ -21,7 +21,8 @@ class ParseConstants {
         val API_KEY: String = BuildConfig.TASTE_DIVE_API_KEY
     }
 }
-ArtistsApiService.kt:
+
+//ArtistsApiService.kt:
 interface ArtistsApiService {
     @GET("similar")
     suspend fun getSimilarArtists(
@@ -50,7 +51,8 @@ object ArtistApi {
         retrofit.create(ArtistsApiService::class.java)
     }
 }
-FindArtistsViewModel.kt:
+
+//FindArtistsViewModel.kt:
 class FindArtistsViewModel : ViewModel() {
     var findArtistsUiState: FindArtistUiState by mutableStateOf(FindArtistUiState.Start)
 

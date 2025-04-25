@@ -1,3 +1,4 @@
+//ArtistApiService.kt
 interface ArtistsApiService {//GitHub Copilot CL 1st attempt
     @GET("similar")
     suspend fun getSimilarArtists(
@@ -25,6 +26,7 @@ object ArtistApi {
     }
 }
 
+//ParseConstants.kt
 class ParseConstants {
     companion object {
         val API_KEY: String = BuildConfig.TASTE_DIVE_API_KEY
@@ -39,6 +41,7 @@ class ParseConstants {
     }
 }
 
+//FindArtistsViewModel.kt
 class FindArtistsViewModel : ViewModel() {
     var findArtistsUiState: FindArtistUiState by mutableStateOf(FindArtistUiState.Start)
 

@@ -1,3 +1,5 @@
+
+//ArtistApiService.kt
 interface ArtistsApiService { //Perplexity AI prompt 3 1st attempt
     @GET("similar")
     suspend fun getSimilarArtists(
