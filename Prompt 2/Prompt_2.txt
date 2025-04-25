@@ -1,0 +1,84 @@
+Привет! Создай пожалуйста графическое представление списка комментариев пользователей для Android-приложения в рамках Compose-функции "MainScreenElements". В данной функции реализовано UI представление страницы 
+магазина приложений в стиле Google play, на котором можно скачать приложение "DoTA 2" и просмотреть основную информацию об этом приложении. В том числе там должны быть и комментарии пользователей. 
+
+Список комментариев пользователей должен быть выведен в рамках LazyColumn, в котором перечислены все UI-элементы этого экрана. Обрати внимание, что в будущем мы не будем знать количество комментариев, которые
+необходимо вывести. По этой причине нужна универсальная реализация (такая, что поддерживается разное количество комментариев пользователей). Комментарии должны быть визуально разделены между друг-другом.
+Каждый комментарий должен включать в себя лого автора, его имя, текст комментария и время, в которое он был оставлен (тип данных комментариев - Message). Элементы комментария расположены относительно друг друга 
+точно так же, как и в приложении Google Play. Текст каждого комментария должен находиться в отдельном Surface, у которого есть скругление, заданное параметром medium в MaterialTheme. Surface должен быть кликабельным 
+и при клике менять цвет фона с surface цвета на primary цвет (эти цвета заявлены в MaterialTheme).Также необходимо ограничить количество выводимых строк текста: только в expanded режиме должно быть более 2 
+строк. Вокруг лого пользователя должен быть бордер primary цвета. Лого также должно быть скруглёной формы и размера 50.dp. Цвет этого бордера от клика не меняется. Весь текст в комментариях использует стиль 
+body2 (заявлен в MaterialTheme). В случае имени автора необходимо указать, что размер шрифта равен 16-му. В остальных случаях указывать размер шрифта не требуется. Цвет текста для времени оставления комментария 
+- secondary, а для остальных - onBackground (заявлены в MaterialTheme). 
+
+UI-представление конкретного комментария рекомендую сделать отдельной Compose-функцией с названием EveryUserReview и вызывать её в LazyCloumn. Тестовые данные комментариев уже созданы и находятся в переменной feedbackSample 
+объекта SampleData. Функция MainScreenElements получает их в качестве параметра. Именно эти данные требуется использовать в качестве данных для комментариев. Ниже приведёна эта функция, а также data class Message 
+и объект SampleData. В этой функции троеточием пропущены некоторые UI-элементы, не влияющие на комментарии пользователей. Поэтому для удобства использования прошу тебя при выводе результата ограничится только item-ом, 
+в котором будут реализованы комментарии.
+
+Импорты в решении выводить не требуется. Заранее благодарю за помощь!
+
+data class Message(
+    val author: String,
+    val time: String,
+    val body: String,
+    val uLogo:Int
+)
+
+object SampleData { //object with list of user reviews information (Message data class)
+    val feedbackSample = listOf(
+        Message(
+            "Marius Conte",
+            "February 14, 2019",
+            "Once you start to learn its secrets, there’s a wild and exciting variety of play here that’s unmatched, even by its peers.",
+            R.drawable.user_logo
+        ),
+        Message(
+            "Maria Marcelino",
+            "November 12, 2017",
+            "List of Android versions:\n" +
+                    "Android KitKat (API 19)\n" +
+                    "Android Lollipop (API 21)\n" +
+                    "Android Marshmallow (API 23)\n" +
+                    "Android Nougat (API 24)\n" +
+                    "Android Oreo (API 26)\n" +
+                    "Android Pie (API 28)\n" +
+                    "Android 10 (API 29)\n" +
+                    "Android 11 (API 30)\n" +
+                    "Android 12 (API 31)\n",
+            R.drawable.user_logo_2
+        ),
+        Message(
+            "Lisa Ajax",
+            "February 5, 2016",
+            "I think Kotlin will be my favorite programming language.\n" +
+                    "It's so much fun!",
+            R.drawable.user_logo_3
+        ),
+    )
+}
+
+@Composable
+fun MainScreenElements(messages: List<Message>) { //receive list of objects with Message data class type
+    val context = LocalContext.current
+        
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+
+            ...
+
+        item {
+            textDescription()
+        }
+        item {
+            ScrollPictures(context)
+        }
+        item {
+            reviewHead()
+        }
+
+        //Раздел с комментариями пользователей должен быть реализован здесь
+    }
+    	    ...
+}

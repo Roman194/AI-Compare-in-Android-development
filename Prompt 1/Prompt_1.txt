@@ -1,0 +1,77 @@
+Привет! Создай пожалуйста UI Compose навигацию для Android-приложения "The Cupcake app". Это приложение имеет 4 раздельных экрана и пользователь может 
+переходить от одного к другому в процессе заказа капкейков. Стартовый экран - StartOrderScreen, где пользователь выбирает количество заказываемых капкейков.
+Когда пользователь выбрал нужное ему количество капкейков, открывается экран Choose flavor Screen, где пользователь выбирает их вкус. Когда он выберет один 
+из доступных вкусов, открывается экран Choose Pickup Date screen, где он выбирает дату, в которую прийдёт за заказом. После выбора одной из возможных дат, 
+открывается экран Order Summary Screen, где пользователь может проверить все детали заказа и подтвердить заказ (функция подтверждения пока что не реализована
+и достаточно просто поставить в этом месте TODO). 
+
+Пользователь может отказаться от заказа на любом экране, кроме первого. В этом случае (onCancelButtonClicked) необходимо отменить заказ (вызов функции
+resetOrder() из orderViewModel) и вернуться на стартовую страницу. Это должно быть реализовано с помощью private функции cancelOrderAndNavigateToStart. 
+
+Также на любом экране, кроме первого, пользователь может вернуться на предыдущий экран. Для этого используется функция navigateUp из Composable-функции 
+CupcakeAppBar.
+
+Все UI-представления экранов реализованы в рамках Composable-функций. Для первого это StartOrderScreen (в файле StartOrderScreen.kt), для второго и третьего -
+SelectOptionScreen из одноимённого файла и для четвёртого это OrderSummaryScreen (в файле SummaryScreen.kt). 
+
+Навигацию необходимо реализовать в рамках Composable-функции CupcakeApp внутри Scaffold. Также в рамках реализации необходимо использовать enum class
+CupcakeScreen. Ниже приведён этот enum class, а также начальное состояние Composable-функций CupcakeApp и CupcakeAppBar, которые необходимо модифицировать.
+Импорты в решении выводить не требуется.
+ 
+Также хочу обрать твоё внимание, что это задание рассматривается в официальном туториале (codelab) на официальном сайте для разработчиков android. Можешь
+им воспользоваться для лучшего понимания контекста задачи и генерации решения. Заранее благодарю за помощь!
+
+enum class CupcakeScreen(@StringRes val title: Int){
+    Start(title = R.string.app_name),
+    Flavor(title = R.string.flavor),
+    Pickup(title = R.string.choose_pickup_date),
+    Summary(title = R.string.order_summary)
+}
+
+/**
+ * Composable that displays the topBar and displays back button if back navigation is possible.
+ */
+@Composable
+fun CupcakeAppBar(
+    canNavigateBack: Boolean,
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    TopAppBar(
+        title = { Text(stringResource(id = R.string.app_name)) },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        modifier = modifier,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back_button)
+                    )
+                }
+            }
+        }
+    )
+}
+
+@Composable
+fun CupcakeApp(
+    viewModel: OrderViewModel = viewModel(),
+    navController: NavHostController = rememberNavController()
+) {
+
+    Scaffold(
+        topBar = {
+            CupcakeAppBar(
+                canNavigateBack = false,
+                navigateUp = { /* TODO: implement back navigation */ }
+            )
+        }
+    ) { innerPadding ->
+        val uiState by viewModel.uiState.collectAsState()
+	
+	//Навигация должна быть реализована здесь
+    }
+}

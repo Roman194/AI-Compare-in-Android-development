@@ -1,0 +1,24 @@
+Привет! Создай пожалуйста data-слой и ViewModel файл UI-слоя Android-приложения "Similar artists finder". Это приложение, в котором пользователь вводит имя артиста (originalArtistName). Это имя отправляется в 
+запросе к API tastedive.com, которое в случае успешного выполнения запроса присылает JSON-файл с похожими артистами. Этот JSON-файл должен быть десереализован с помощью библиотеки Moshi в переменную типа 
+List<ArtistUI>, которая передаётся на UI представление приложения через параметр artistUIValues в FindArtistUiState.Success. Sealed interface FindArtistUiState управляет состояниями текущего UI представления 
+приложения. Управление происходит в файле FindArtistsViewModel через задание различных состояний и передачу необходимых этим состояниям параметров. Изначально задаётся состояние FindArtistUiState.Start. Когда 
+пользователь нажал на кнопку поиска введёного артиста, запускается функция getSimilarArtists и состояние изменяется на FindArtistUiState.Loading и производится проверка на то, что originalArtistName не пустой. 
+Если он пустой, то состояние изменяется на FindArtistUiState.Error с errorMessage "Please enter an artist name". В противном случае при помощи библиотеки Retrofit формируется запрос к API и приложение получает ответ
+ в формате Either<ErrorResponse, MoshiResponse>. В приложение используется кастомная реализация Either метода. Она устроена так, что в случае, если пришла ошибка (Either.Fail), то в качестве ответа прийдёт экземпляр data-класса
+ErrorResponse. А если всё прошло успешно (Either.Success), то в качестве ответа прийдёт экземпляр data-класса MoshiResponse. В случае если пришла ошибка, то состояние UI слоя приложения изменяется на FindArtistUiState.Error,
+иначе изменяется на FindArtistUiState.Success и необходимо с помощью data-классов десереализовать экземпляр MoshiResponse в List<ArtistUI>.
+
+Ниже прикрепляю data-классы, используемые библиотекой Moshi для десереализации пришедших из интернета данных, а также data-классы ErrorResponse и ArtistUI. Также прикрепляю sealed interface FindArtistUiState и класс
+FindArtistsViewModel, куда приходят запросы пользователей на поиск похожих исполнителей и где нужно выполнить запрос к API и получить от него результат этого запроса. Также обрати внимание на методы конвертации данных
+(ArtistMoshi.toUI, convertArtistNameToQueryFormat и ErrorResponse.ToStringType). Они должны быть использованы для конвертации данных из одного типа в другой на различных этапах выполнения программы.
+
+Теперь о data-слое. Он должен состоять из двух файлов: ArtistsApiService.kt и ClientBuilder.kt. Первый представляет собой одноимённый интерфейс, где реализован GET-HTTP метод getSimilarArtists для отправки запроса 
+к API. Метод состоит из строки "similar" и трёх query (k, q и type), которые к нему добавляются. В k необходимо передать API-ключ, который должен храниться в companion object класса ParseConstants. В q необходимо
+передать originalArtistName, который должен прийти из ViewModel при вызове метода от туда. type должен быть равен "music". Доступ к методу getSimilarArtists осуществляется с помощью переменной artistsRetrofitService
+типа ArtistApiService в object-е ArtistApi, где происходит связывание переменной Retrofit.Builder() с этим интерфейсом. Этот билдер должен быть предварительно инициализирован с добавлением OkHttpClient-а, 
+ScalarsConverterFactory и MoshiConverterFactory (с добавлением переменной Moshi.Builder()), а также EitherCallAdapterFactory и базовым URL ("https://tastedive.com/api/") и иметь модификатор доступа private.
+
+Во втором файле должен быть класс ParseConstants, имеющий companion object, в котором хранится переменная API_KEY со значением ключа доступа к API. Получить этот ключ можно с помощью команды BuildConfig.TASTE_DIVE_API_KEY.
+Также здесь должен быть инициализирован OkHttpClient с добавлением HttpLoggingInterceptor-а.
+
+Импорты в решении выводить не требуется. Все нужные для решения библиотеки (ViewModel, Retrofit, Moshi, OkHTTP) уже добавлены в проект. Permission на доступ в интернет тоже. Заранее благодарю за помощь!
